@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Grid Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div id="app-container" class="container mx-auto p-4">
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-center">Needle & Haystack</h1>
+            <p class="text-center mt-2">The goal of this site is to exercise your automation skills and understanding. It is simple: find the needle in the haystack. When you find it, click it and assert the status label = Success and use the color green.</p>
+        </header>
+        <label id="status-label" class="status block text-xl font-bold mb-4 p-2 bg-gray-200">Status: Not checked</label>
+        <div class="grid-container grid grid-cols-10 gap-4" id="grid-container"></div>
+    </div>
+    <script>
+        function generateGUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function createDropdown(includeNeedle = false) {
+            const dropdown = document.createElement('select');
+            dropdown.className = 'dropdown block w-full border-gray-300 rounded-md shadow-sm';
+            const dynamicId = generateGUID();
+            dropdown.id = dynamicId;
+            dropdown.addEventListener('change', updateStatus);
+
+            const numChildren = Math.floor(Math.random() * 10) + 1;
+            for (let i = 0; i < numChildren; i++) {
+                const option = document.createElement('option');
+                option.value = generateGUID();
+                option.textContent = option.value;
+                dropdown.appendChild(option);
+            }
+
+            if (includeNeedle) {
+                const needleOption = document.createElement('option');
+                needleOption.value = 'needle';
+                needleOption.textContent = 'needle';
+                dropdown.appendChild(needleOption);
+            }
+
+            return dropdown;
+        }
+
+        function createGrid(rows, cols) {
+            const gridContainer = document.getElementById('grid-container');
+            const totalDropdowns = rows * cols;
+            // Ensure at least one dropdown includes the needle
+            const needleDropdownIndex = Math.floor(Math.random() * totalDropdowns);
+
+            for (let i = 0; i < totalDropdowns; i++) {
+                const includeNeedle = (i === needleDropdownIndex);
+                const dropdown = createDropdown(includeNeedle);
+                gridContainer.appendChild(dropdown);
+            }
+        }
+
+        function updateStatus() {
+            const statusLabel = document.getElementById('status-label');
+            const selectedValue = this.value;
+            if (selectedValue === 'needle') {
+                statusLabel.textContent = 'Status: Success';
+                statusLabel.className = 'status bg-green-600 text-white p-2 rounded';
+            } else {
+                statusLabel.textContent = 'Status: Failed';
+                statusLabel.className = 'status bg-red-600 text-white p-2 rounded';
+            }
+        }
+
+        function initialize() {
+            createGrid(20, 10);
+        }
+
+        initialize();
+    </script>
+</body>
+</html>
