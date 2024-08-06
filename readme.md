@@ -1,5 +1,6 @@
 # Needle & Haystack
 
+[![Watch the video](https://img.youtube.com/vi/hOF3COhAol4/maxresdefault.jpg)](https://www.youtube.com/watch?v=hOF3COhAol4)
 This project provides a simple web application to exercise your automation skills by finding the needle in a haystack of dropdown options. The application is containerized using Docker and can be easily deployed using Docker Compose.
 
 ## Table of Contents
@@ -38,16 +39,6 @@ cd needle-in-haystack
 
 2. Open your browser and navigate to `http://localhost:8888` to view the application.
 
-## Project Structure
-
-```plaintext
-needle-in-haystack/
-├── Dockerfile             # Dockerfile for building the Nginx container
-├── docker-compose.yml     # Docker Compose configuration
-├── index.html             # HTML file for the web application
-├── nginx.conf             # Nginx configuration file
-└── readme.md              # Project readme file
-```
 
 ## Usage
 
