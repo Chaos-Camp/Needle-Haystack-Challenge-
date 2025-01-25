@@ -42,5 +42,5 @@ cd needle-in-haystack
 
 ## Usage
 
-The goal of this web application is to find the "needle" in the dropdowns within the grid. Once you find it, select it to change the status to "Success" and the label color to green. You can use any tool and tenique you choose , key is the test needs to be flake free.
+The goal of this web application is to find the "needle" in the dropdowns within the grid. Once you find it, select it to change the status to "Success" and the label color to green. You can use any tool and technique you choose, the key is the test needs to be flake free.
 
